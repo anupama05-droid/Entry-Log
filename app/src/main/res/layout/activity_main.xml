@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:background="#234001"
+        android:textColor="#F6F8F8"
+        android:background="#045494"
         android:id="@+id/logbtn"/>
 </LinearLayout>

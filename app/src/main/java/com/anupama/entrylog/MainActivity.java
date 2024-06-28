@@ -1,6 +1,7 @@
 package com.anupama.entrylog;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -32,9 +33,20 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getName=e1.getText().toString();
-                String getPass=e2.getText().toString();
-                Toast.makeText(getApplicationContext(),getName+" "+getPass,Toast.LENGTH_LONG).show();
+                try {
+                    String getUname=e1.getText().toString();
+                    String getPass=e2.getText().toString();
+                    if (getUname.equals("Admin") && getPass.equals("12345")) {
+                        Intent i = new Intent(getApplicationContext(), LogEntry.class);
+                        startActivity(i);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Invalid Credential",Toast.LENGTH_LONG).show();
+                    }
+                }
+                catch (Exception e){
+                    Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
