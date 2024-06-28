@@ -3,16 +3,26 @@
     android:orientation="vertical"
     android:padding="30px"
     android:gravity="center"
+    android:background="@drawable/background"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="280px"
+        android:layout_height="300px"
+        android:background="@drawable/student"
+        android:layout_marginBottom="200px"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="User Name"/>
+        android:text="User Name" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter your User Name"
-        android:id="@+id/uname"/>
+        android:id="@+id/uname"
+        android:drawableLeft="@drawable/baseline_account_circle_24"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +32,8 @@
         android:layout_height="wrap_content"
         android:hint="Enter your Password"
         android:id="@+id/pass"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:drawableLeft="@drawable/baseline_vpn_key_24"/>
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
