@@ -15,10 +15,20 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
 public class LogEntry extends AppCompatActivity {
 
     EditText e1,e2,e3,e4;
     AppCompatButton b1,b2;
+    String apiUrl="http://10.0.4.16:3000/api/students";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -54,11 +64,43 @@ public class LogEntry extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    //Value reading
                     String getName=e1.getText().toString();
                     String getAdmno=e2.getText().toString();
                     String getSysno=e3.getText().toString();
                     String getDept=e4.getText().toString();
-                    Toast.makeText(getApplicationContext(),getName+" "+getAdmno+" "+getSysno+" "+getDept,Toast.LENGTH_LONG).show();
+
+                    //JSON object creation
+                    JSONObject student=new JSONObject();
+                    student.put("name",getName);
+                    student.put("admission_number",getAdmno);
+                    student.put("system_number",getSysno);
+                    student.put("department",getDept);
+
+                    //JSON object request creation
+                    JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(
+                            Request.Method.POST,
+                            apiUrl,
+                            student,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    Toast.makeText(getApplicationContext(), "Added sucessfully", Toast.LENGTH_LONG).show();
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                    );
+
+                    //Request queue
+                    RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+                    requestQueue.add(jsonObjectRequest);
+
                 }
                 catch (Exception e){
                     Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
